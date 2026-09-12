@@ -69,7 +69,7 @@
 	buttons {
 		compatible = "gpio-keys";
 		button0: button_0 {
-			gpios = <&gpio1 0 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			gpios = <&gpio0 6 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
 			label = "Push button switch 0";
 		};
 	};
@@ -141,18 +141,6 @@
 	pinctrl-0 = <&i2c0_default>;
 	pinctrl-1 = <&i2c0_sleep>;
 	pinctrl-names = "default", "sleep";
-
-	imu: imu@0 {
-		compatible = "i2c-device";
-		label = "imu";
-		reg = <0>;
-	};
-
-	mag: mag@0 {
-		compatible = "i2c-device";
-		label = "mag";
-		reg = <0>;
-	};
 };
 
 &pwm0 {
