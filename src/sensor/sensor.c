@@ -285,7 +285,7 @@ int sensor_scan(void)
 		if (mag_id >= 0)
 			sensor_interface_register_sensor_mag_i2c(&sensor_mag_dev);
 	}
-	if (mag_id < 0 && !(sensor_imu_dev_reg & 0x80)) // I2C IMU
+	/*if (mag_id < 0 && !(sensor_imu_dev_reg & 0x80)) // I2C IMU
 	{
 		// IMU may support passthrough mode if the magnetometer is connected through the IMU
 		int err = sensor_imu->ext_passthrough(SENSOR_EXT_MODE_I2C_PASSTHROUGH); // no need to disable, the imu will be reset later
@@ -339,7 +339,7 @@ int sensor_scan(void)
 				}
 			}
 		}
-	}
+	}*/
 #endif
 #if !SENSOR_MAG_SPI_EXISTS && !SENSOR_DIRECT_MAG_EXISTS && !SENSOR_MAG_EXT_EXISTS
 	LOG_WRN("Magnetometer node does not exist");
