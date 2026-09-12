@@ -27,6 +27,7 @@
 #include "sensor/sensor.h"
 
 #include <zephyr/sys/reboot.h>
+#include <zephyr/drivers/gpio.h>
 
 #define DFU_DBL_RESET_MEM 0x20007F7C
 #define DFU_DBL_RESET_APP 0x4ee5677e
@@ -44,6 +45,18 @@ LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
 int main(void)
 {
+	// --- ÉP CHÂN P0.17 CẤP NGUỒN CHO IMU ---
+    nrf_gpio_cfg(
+        NRF_GPIO_PIN_MAP(0, 17),
+        NRF_GPIO_PIN_DIR_OUTPUT,
+        NRF_GPIO_PIN_INPUT_DISCONNECT,
+        NRF_GPIO_PIN_NOPULL,
+        NRF_GPIO_PIN_H0H1, // Chế độ High Drive cấp dòng khỏe cho cảm biến
+        NRF_GPIO_PIN_NOSENSE
+    );
+    nrf_gpio_pin_set(NRF_GPIO_PIN_MAP(0, 17)); // Kéo lên mức 3.3V
+    k_msleep(150); // Chờ 150ms để cảm biến IMU khởi động nguồn xong
+    // ----------------------------------------
 #ifdef NRF_RESET
 	bool reset_pin_reset = NRF_RESET->RESETREAS & RESET_RESETREAS_RESETPIN_Msk;
 	NRF_RESET->RESETREAS = NRF_RESET->RESETREAS; // Clear RESETREAS
