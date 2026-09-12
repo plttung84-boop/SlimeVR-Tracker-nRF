@@ -27,7 +27,7 @@
 #include "sensor/sensor.h"
 
 #include <zephyr/sys/reboot.h>
-#include <zephyr/drivers/gpio.h>
+#include <hal/nrf_gpio.h>
 
 #define DFU_DBL_RESET_MEM 0x20007F7C
 #define DFU_DBL_RESET_APP 0x4ee5677e
